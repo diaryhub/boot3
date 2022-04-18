@@ -3,6 +3,8 @@
 
 <configuration>
 	<typeAliases>
+		<typeAlias type="com.study.boot3.util.Pager" alias="Pager"/>
 		<typeAlias type="com.study.boot3.board.BoardVO" alias="BoardVO"/>
+		<typeAlias type="com.study.boot3.board.BoardFilesVO" alias="BoardFilesVO"/>
 	</typeAliases>
 </configuration>

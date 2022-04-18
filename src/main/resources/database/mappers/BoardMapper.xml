@@ -4,8 +4,8 @@
 
 <mapper namespace="com.study.boot3.board.BoardMapper">
 
-	<select id="getList" resultType="BoardVO">
-		SELECT * FROM BOARD
+	<select id="getList" parameterType="Pager" resultType="BoardVO">
+		SELECT * FROM BOARD WHERE TITLE LIKE CONCAT('%',#{search},'%') ORDER BY NUM DESC LIMIT #{startRow},#{perPage}
 	</select>
 	<select id="getDetail" parameterType="BoardVO" resultType="BoardVO">
 		SELECT * FROM BOARD WHERE NUM=#{num}
@@ -19,5 +19,22 @@
 	<delete id="setDelete" parameterType="BoardVO">
 		DELETE FROM BOARD WHERE NUM=#{num}
 	</delete>
+
+	<select id="getFileList" resultType="BoardFilesVO">
+		SELECT * FROM BOARDFILES
+	</select>
+
+	<select id="getFileDetail" resultType="BoardFilesVO" parameterType="BoardVO">
+		SELECT * FROM BOARDFILES BF INNER JOIN BOARD B WHERE B.NUM=#{num}
+	</select>
+
+	<insert id="setFileAdd" parameterType="BoardFilesVO">
+		INSERT INTO BOARDFILES (FILENUM,NUM,FILENAME,ORINAME) VALUES (null,#{num},#{fileName},#{oriName})
+	</insert>
+	<delete id="setFileDelete" parameterType="BoardFilesVO">
+		DELETE FROM BOARDFILES WHERE FILENUM=#{fileNum}
+	</delete>
+
+
 
 </mapper>

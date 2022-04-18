@@ -1,5 +1,7 @@
 package com.study.boot3.board;
 
+import java.sql.Date;
+
 import lombok.Data;
 
 @Data
@@ -10,6 +12,7 @@ public class BoardVO {
 	private String writer;
 	private String contents;
 	private Long hit;
+	private Date regDate;
 	private Long ref;
 	private Long step;
 	private Long depth;
