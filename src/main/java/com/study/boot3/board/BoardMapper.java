@@ -26,4 +26,6 @@ public interface BoardMapper {
 	public BoardFilesVO getFileDetail(BoardVO boardVO)throws Exception;
 	
 	public List<BoardFilesVO> getFileList()throws Exception;
+	
+	public Long total(Pager pager) throws Exception;
 }

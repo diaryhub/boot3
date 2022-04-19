@@ -5,7 +5,37 @@
 <mapper namespace="com.study.boot3.board.BoardMapper">
 
 	<select id="getList" parameterType="Pager" resultType="BoardVO">
-		SELECT * FROM BOARD WHERE TITLE LIKE CONCAT('%',#{search},'%') ORDER BY NUM DESC LIMIT #{startRow},#{perPage}
+		SELECT * 
+		FROM BOARD 
+		WHERE
+		<choose>
+			<when test="kind=='col1'">
+				TITLE 
+			</when>
+			<when test="kind=='col2'">
+				CONTNETS 
+			</when>
+			<when test="kind=='col3'">
+				WRITER 
+			</when>
+			<otherwise>
+				TITLE
+			</otherwise>
+		</choose>
+		LIKE CONCAT('%',#{search},'%') 
+		ORDER BY NUM DESC LIMIT #{startRow},#{perPage}
+	</select>
+	<select id="total" parameterType="Pager" resultType="Long">
+		SELECT COUNT(NUM) 
+		FROM BOARD
+		WHERE NUM>0 AND
+		<choose>
+			<when test="kind=='col1'">TITLE</when>
+			<when test="kind=='col2'">CONTENTS</when>
+			<when test="kind=='col3'">WRITER</when>
+			<otherwise>TITLE</otherwise>
+		</choose>
+		LIKE '%'||#{search}||'%'
 	</select>
 	<select id="getDetail" parameterType="BoardVO" resultType="BoardVO">
 		SELECT * FROM BOARD WHERE NUM=#{num}
@@ -34,7 +64,6 @@
 	<delete id="setFileDelete" parameterType="BoardFilesVO">
 		DELETE FROM BOARDFILES WHERE FILENUM=#{fileNum}
 	</delete>
-
 
 
 </mapper>

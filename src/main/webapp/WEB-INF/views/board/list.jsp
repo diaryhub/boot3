@@ -44,10 +44,22 @@
 					</c:forEach>
 				</tbody>
 			</table>
+			<nav aria-label="Page navigation example">
+				<ul class="pagination">
+						<li class="page-item"><a class="page-link"
+							href="./list?pn=${pager.pre?pager.startNum-1:1}&kind=${kind}&search=${search}">&lt;</a></li>
+					<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
+						<li class="page-item"><a class="page-link"
+							href="./list?pn=${i}&kind=${kind}&search=${search}">${i}</a></li>
+					</c:forEach>
+					<li class="page-item"><a class="page-link"
+						href="./list?pn=${pager.next? pager.lastNum+1:pager.lastNum}&kind=${kind}&search=${search}">&gt;</a></li>
+				</ul>
+			</nav>
 		</div>
 		<div class="row justify-content-end">
-		<a type="button" class="btn btn-primary col-1" href="./add">WRITE</a>
-		 </div>
+			<a type="button" class="btn btn-primary col-1" href="./add">WRITE</a>
+		</div>
 
 	</div>
 

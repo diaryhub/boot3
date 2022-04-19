@@ -21,9 +21,9 @@ public class BoardController {
 	@GetMapping("list")
 	public ModelAndView list(Pager pager) throws Exception{
 		ModelAndView mv = new ModelAndView();
-		pager.makeRow();
 		List<BoardVO> ar = boardService.getList(pager);
 		mv.addObject("list", ar);
+		mv.addObject("pager",pager);
 		mv.setViewName("board/list");
 		return mv;
 	}
