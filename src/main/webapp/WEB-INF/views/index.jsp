@@ -57,6 +57,93 @@
 			</button>
 		</div>
 	</div>
+	<div class="container">
+		<input type="text" id="d1">
+		<button id="btn">CLICK</button>
+		<button id="btn2">CLICK2</button>
+		<input type="checkbox" name="ch" class="ch" value="1"> <input
+			type="checkbox" name="ch" class="ch" value="2"> <input
+			type="checkbox" name="ch" class="ch" value="3"> <input
+			type="checkbox" name="ch" class="ch" value="4">
+		<button id="btn3">CLICK3</button>
+		<div id="result"></div>
+	</div>
 	<c:import url="./temp/header_script.jsp"></c:import>
+	<script type="text/javascript">
+		/* 	const ch = document.getElementsByClassName("ch");
+		 for(c of ch){
+		 c.addEventListener("click",function(){
+		 alert(this.value);
+		 });
+		 } */
+		/* 
+		 $('.ch').click(function(){
+		 console.log(this.value);
+		 }); */
+
+		/* $('.ch').on({
+			click:function(){
+				console.log("click");
+			},
+			change:function(){
+				console.log("change");
+			} 
+		});
+		 */
+		
+		$('.ch').click(function(e) {
+			
+			/* let v = $(this).val();
+			console.log(v); */
+			let c = $(this).prop("checked");
+			console.log(c);
+			$('.ch').prop("checked",true);
+			
+		});
+		$('.ch').change(function() {
+			console.log("change test");
+		});
+
+		$('#btn').on("click", function() {
+			alert("jquery");
+		});
+		
+		$('#btn2').click(function() {
+			$('.ch').each(function(idx,item){
+				console.log(idx);
+				console.log(item);
+				console.log($(item).val());
+			});
+		});
+		
+		$('#btn3').click(function(){
+			
+			let r = "<div>";
+			r = r+'<input type="checkbox" name="ch" class="ch" value="1">';
+			r = r +"</div>";
+			
+			$("#result").append(r);
+			
+		});
+	</script>
+
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
