@@ -3,8 +3,11 @@
 
 <configuration>
 	<typeAliases>
+		<typeAlias type="java.util.List" alias="List"/>
 		<typeAlias type="com.study.boot3.util.Pager" alias="Pager"/>
 		<typeAlias type="com.study.boot3.board.BoardVO" alias="BoardVO"/>
 		<typeAlias type="com.study.boot3.board.BoardFilesVO" alias="BoardFilesVO"/>
+		<typeAlias type="com.study.boot3.member.MemberVO" alias="MemberVO"/>
+		<typeAlias type="com.study.boot3.member.MemberFileVO" alias="MemberFileVO"/>
 	</typeAliases>
 </configuration>

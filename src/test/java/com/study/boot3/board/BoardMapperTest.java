@@ -20,7 +20,7 @@ class BoardMapperTest {
 	@Autowired
 	private BoardMapper boardMapper;
 	
-	@Test
+	//@Test
 	void getListTest()throws Exception{
 		Pager pager = new Pager();
 		pager.makeRow();
@@ -28,10 +28,10 @@ class BoardMapperTest {
 		assertEquals(10, ar.size());
 	}
 	
-	//@Test
+	@Test
 	void test() throws Exception {
 		BoardVO boardVO = new BoardVO();
-		boardVO.setNum(3L);
+		boardVO.setNum(109L);
 		boardVO = boardMapper.getDetail(boardVO);
 		System.out.println(boardVO.toString());
 		assertNotNull(boardVO);
@@ -76,15 +76,16 @@ class BoardMapperTest {
 	
 	//@Test
 	void fileListTest() throws Exception{
-			List<BoardFilesVO> ar = boardMapper.getFileList();
+			BoardVO boardVO = new BoardVO();
+			List<BoardFilesVO> ar = boardMapper.getFileList(boardVO);
 			assertNotNull(ar);
 		}
 	
 	//@Test
 	void fileDetailTest()throws Exception{
-		BoardVO boardVO = new BoardVO();
-		boardVO.setNum(1L);
-		BoardFilesVO boardFilesVO = boardMapper.getFileDetail(boardVO);
+		BoardFilesVO boardFilesVO = new BoardFilesVO();
+		boardFilesVO.setFileNum(1L);
+		boardFilesVO = boardMapper.getFileDetail(boardFilesVO);
 		assertNotNull(boardFilesVO);
 	}
 	
@@ -100,9 +101,9 @@ class BoardMapperTest {
 	
 	//@Test
 	void fileDeleteTest()throws Exception{
-		BoardFilesVO boardFilesVO = new BoardFilesVO();
-		boardFilesVO.setFileNum(1L);
-		int result = boardMapper.setFileDelete(boardFilesVO);
+		BoardVO boardVO = new BoardVO();
+		boardVO.setNum(1L);
+		int result = boardMapper.setFileDelete(boardVO);
 		assertNotEquals(0, result);
 	}
 	

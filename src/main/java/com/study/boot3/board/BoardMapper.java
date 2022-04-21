@@ -21,11 +21,11 @@ public interface BoardMapper {
 	
 	public int setFileAdd(BoardFilesVO boardFilesVO)throws Exception;
 	
-	public int setFileDelete(BoardFilesVO boardFilesVO)throws Exception;
+	public int setFileDelete(BoardVO boardVO)throws Exception;
 	
-	public BoardFilesVO getFileDetail(BoardVO boardVO)throws Exception;
+	public BoardFilesVO getFileDetail(BoardFilesVO boardFilesVO)throws Exception;
 	
-	public List<BoardFilesVO> getFileList()throws Exception;
+	public List<BoardFilesVO> getFileList(BoardVO boardVO)throws Exception;
 	
 	public Long total(Pager pager) throws Exception;
 }

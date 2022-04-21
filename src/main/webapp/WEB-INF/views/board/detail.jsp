@@ -16,9 +16,37 @@
 <body>
 	<c:import url="../temp/header.jsp"></c:import>
 	<h1>Detail Page</h1>
-		${VO.num}
-		<a class="btn btn-primary" href="./delete?num=${VO.num}">DELETE</a>
-		
-	   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+	<div class="container">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th scope="col" class="col-2">${VO.num}</th>
+					<th scope="col" class="col-4">${VO.title}</th>
+					<th scope="col" class="col-2">${VO.writer}</th>
+					<th scope="col" class="col-2">${VO.regDate}</th>
+					<th scope="col" class="col-2">${VO.hit}</th>
+				</tr>
+			</thead>
+		</table>
+		<div class="border rounded my-1">
+			<div class="my-2 mx-5">${VO.contents}</div>
+			<c:forEach items="${VO.filesVOs}" var="f">
+				<div class="my-2 mx-5">
+					<a href="../resources/upload/board/${f.fileName}"> <img src="../resources/upload/board/${f.fileName}">
+					</a>
+					<a href="./fileDown?fileNum=${f.fileNum}">${f.fileName}</a>
+				</div>
+			</c:forEach>
+			
+		</div>
+
+
+		<div class="d-flex justify-content-end mx-2">
+			<a class="btn btn-primary mx-2" href="./update?num=${VO.num}">UPDATE</a>
+			<a class="btn btn-primary mx-2" href="./delete?num=${VO.num}">DELETE</a>
+		</div>
+	</div>
+
+	<c:import url="../temp/header_script.jsp"></c:import>
 </body>
 </html>

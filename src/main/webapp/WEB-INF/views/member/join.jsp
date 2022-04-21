@@ -16,29 +16,37 @@
 	<div class="container my-5">
 		<div class="row">
 			<div class="col-4"></div>
-			<form action="./add" method="post" class="col-4 border row"
+			<form action="./join" method="post" class="col-4 border row"
 				enctype="multipart/form-data">
 				<div class="col"></div>
 				<div class="col-6">
-					<label>title</label>
+					<label>ID</label>
 					<div>
-						<input name="title">
+						<input name="id">
 					</div>
-					<label>writer</label>
+					<label>PW</label>
 					<div>
-						<input name="writer">
+						<input name="pw">
 					</div>
-					<label>contents</label>
+					<label>NAME</label>
 					<div>
-						<textarea rows="5" cols="22" name="contents"></textarea>
+						<input name="name">
 					</div>
-				<input class="form-control" type="file" id="formFileMultiple" name="files"> 
-				<input class="form-control" type="file" id="formFileMultiple" name="files">
+					<label>EMAIL</label>
+					<div>
+						<input name="email">
+					</div>
+					<label>PHONE</label>
+					<div>
+						<input name="phone">
+					</div>
+					<div style="height: 30px"></div>
+				<input class="form-control" type="file" id="formFileMultiple" name="file"> 
 				</div>
 				<div class="col"></div>
 				<div class="row justify-content-center">
 					<div class="col-1 my-4">
-						<button type="submit" class="btn btn-primary">ADD</button>
+						<button type="submit" class="btn btn-primary">JOIN</button>
 					</div>
 				</div>
 			</form>

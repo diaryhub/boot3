@@ -16,29 +16,23 @@
 	<div class="container my-5">
 		<div class="row">
 			<div class="col-4"></div>
-			<form action="./add" method="post" class="col-4 border row"
-				enctype="multipart/form-data">
+			<form action="./update" method="post" class="col-4 border row">
 				<div class="col"></div>
 				<div class="col-6">
+				<input type="hidden" name="num" value="${VO.num}">
 					<label>title</label>
 					<div>
-						<input name="title">
-					</div>
-					<label>writer</label>
-					<div>
-						<input name="writer">
+						<input class="form-control" name="title" value="${VO.title}">
 					</div>
 					<label>contents</label>
 					<div>
-						<textarea rows="5" cols="22" name="contents"></textarea>
+						<textarea class="form-control" rows="5" cols="22" name="contents">${VO.contents}</textarea>
 					</div>
-				<input class="form-control" type="file" id="formFileMultiple" name="files"> 
-				<input class="form-control" type="file" id="formFileMultiple" name="files">
 				</div>
 				<div class="col"></div>
 				<div class="row justify-content-center">
-					<div class="col-1 my-4">
-						<button type="submit" class="btn btn-primary">ADD</button>
+					<div class="col-3 my-4">
+						<button type="submit" class="btn btn-primary">UPDATE</button>
 					</div>
 				</div>
 			</form>
