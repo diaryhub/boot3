@@ -20,19 +20,19 @@
 		<table class="table table-striped">
 			<thead>
 				<tr>
-					<th scope="col" class="col-2">${VO.num}</th>
-					<th scope="col" class="col-4">${VO.title}</th>
-					<th scope="col" class="col-2">${VO.writer}</th>
-					<th scope="col" class="col-2">${VO.regDate}</th>
-					<th scope="col" class="col-2">${VO.hit}</th>
+					<th scope="col" class="col-2">${VO.productNum}</th>
+					<th scope="col" class="col-4">${VO.productName}</th>
+					<th scope="col" class="col-2">${VO.productPrice}</th>
+					<th scope="col" class="col-2">${VO.productCount}</th>
 				</tr>
 			</thead>
 		</table>
 		<div class="border rounded my-1">
-			<div class="my-2 mx-5">${VO.contents}</div>
+			<div class="my-2 mx-5">${VO.productDetail}</div>
 			<c:forEach items="${VO.filesVOs}" var="f">
 				<div class="my-2 mx-5">
-					<a href="./fileDown?fileNum=${f.fileNum}">${f.fileName}</a>
+					<a href="../resources/upload/product/${f.fileName}"> <img src="../resources/upload/product/${f.fileName}">
+					</a>
 				</div>
 			</c:forEach>
 			
@@ -40,8 +40,8 @@
 
 
 		<div class="d-flex justify-content-end mx-2">
-			<a class="btn btn-primary mx-2" href="./update?num=${VO.num}">UPDATE</a>
-			<a class="btn btn-primary mx-2" href="./delete?num=${VO.num}">DELETE</a>
+			<a class="btn btn-primary mx-2" href="./update?productNum=${VO.productNum}">UPDATE</a>
+			<a class="btn btn-primary mx-2" href="./delete?productNum=${VO.productNum}">DELETE</a>
 		</div>
 	</div>
 
