@@ -57,6 +57,87 @@
 			</button>
 		</div>
 	</div>
+	<div class="container">
+		<input type="text" id="v1"> <label>a</label> <input
+			type="checkbox" class="num" name="num" value="a"> <label>b</label>
+		<input type="checkbox" class="num" name="num" value="b"> <label>c</label>
+		<input type="checkbox" class="num" name="num" value="c"> <label>d</label>
+		<input type="checkbox" class="num" name="num" value="d">
+		<button id="btn1">GET</button>
+		<button id="btn2">POST</button>
+		<button id="btn3">AJAX</button>
+
+	</div>
 	<c:import url="./temp/header_script.jsp"></c:import>
+	<script type="text/javascript">
+		$('#btn1').click(function() {
+			let v = $('#v1').val();
+			console.log(v);
+
+			$.get("./getTest?msg=" + v, function(data) {
+				console.log("응답완료");
+				console.log(data.trim());
+			});
+
+		});
+
+		$('#btn2').click(function() {
+
+			let v = $('#v1').val();
+
+			$.post("./postTest", {
+				msg : v
+			}, function(data) {
+				console.log(data.trim());
+			})
+		});
+
+		$('#btn3').click(function() {
+			let ar = [];
+
+			$('.num').each(function(index, item) {
+				if ($(item).prop("checked")) {
+					console.log($(item).val());
+					ar.push($(item).val());
+				}
+			});
+
+			let v = $('#v1').val();
+			$.ajax({
+				method : "POST",
+				url : "./arrayTest",
+				traditional : true,
+				data : {
+					msg : v,
+					numbers : ar
+				},
+				success : function(d) {
+					console.log(d.trim());
+				},
+				error : function() {
+					alert("에러 발생");
+				}
+			});
+		});
+	</script>
+
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
