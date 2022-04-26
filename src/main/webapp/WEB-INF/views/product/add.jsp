@@ -80,22 +80,19 @@
 		});
 
 		let count = 0;
-		$("#fileAdd")
-				.click(
-						function() {
-							if (count > 4) {
-								alert('최대 5개만 가능');
-								return;
-							}
-							let result = '<div class="input-group mt-2">';
-							result = result
-									+ '<input class="form-control files" type="file" name="files">';
-							result = result
-									+ '<button class="btn btn-outline-secondary del" type="button">delete</button>';
-							result = result + '</div>';
-							$("#fileResult").append(result);
-							count++;
-						});
+		$("#fileAdd").click(
+			function() {
+				if (count > 4) {
+					alert('최대 5개만 가능');
+					return;
+				}
+				let result = '<div class="input-group mt-2">';
+				result = result + '<input class="form-control files" type="file" name="files">';
+				result = result + '<button class="btn btn-outline-secondary del" type="button">delete</button>';
+				result = result + '</div>';
+				$("#fileResult").append(result);
+				count++;
+			});
 
 		$('#fileResult').on("click", ".del", function() {
 			$(this).parent().remove();
