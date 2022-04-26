@@ -64,7 +64,7 @@
 					aria-label="Search" name="search" style="width: 20%">
 				<button class="btn btn-outline-success" type="submit">Search</button>
 			</form>
-			<a type="button" class="btn btn-primary col-1" href="./add">WRITE</a>
+			<a type="button" class="btn btn-primary col-1" href="./add">ADD</a>
 		</div>
 
 	</div>

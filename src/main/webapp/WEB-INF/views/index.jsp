@@ -58,72 +58,66 @@
 		</div>
 	</div>
 	<div class="container">
-		<input type="text" id="d1">
-		<button id="btn">CLICK</button>
-		<button id="btn2">CLICK2</button>
-		<input type="checkbox" name="ch" class="ch" value="1"> <input
-			type="checkbox" name="ch" class="ch" value="2"> <input
-			type="checkbox" name="ch" class="ch" value="3"> <input
-			type="checkbox" name="ch" class="ch" value="4">
-		<button id="btn3">CLICK3</button>
-		<div id="result"></div>
+		<input type="text" id="v1"> <label>a</label> <input
+			type="checkbox" class="num" name="num" value="a"> <label>b</label>
+		<input type="checkbox" class="num" name="num" value="b"> <label>c</label>
+		<input type="checkbox" class="num" name="num" value="c"> <label>d</label>
+		<input type="checkbox" class="num" name="num" value="d">
+		<button id="btn1">GET</button>
+		<button id="btn2">POST</button>
+		<button id="btn3">AJAX</button>
+
 	</div>
 	<c:import url="./temp/header_script.jsp"></c:import>
 	<script type="text/javascript">
-		/* 	const ch = document.getElementsByClassName("ch");
-		 for(c of ch){
-		 c.addEventListener("click",function(){
-		 alert(this.value);
-		 });
-		 } */
-		/* 
-		 $('.ch').click(function(){
-		 console.log(this.value);
-		 }); */
+		$('#btn1').click(function() {
+			let v = $('#v1').val();
+			console.log(v);
 
-		/* $('.ch').on({
-			click:function(){
-				console.log("click");
-			},
-			change:function(){
-				console.log("change");
-			} 
-		});
-		 */
-		
-		$('.ch').click(function(e) {
-			
-			/* let v = $(this).val();
-			console.log(v); */
-			let c = $(this).prop("checked");
-			console.log(c);
-			$('.ch').prop("checked",true);
-			
-		});
-		$('.ch').change(function() {
-			console.log("change test");
-		});
-
-		$('#btn').on("click", function() {
-			alert("jquery");
-		});
-		
-		$('#btn2').click(function() {
-			$('.ch').each(function(idx,item){
-				console.log(idx);
-				console.log(item);
-				console.log($(item).val());
+			$.get("./getTest?msg=" + v, function(data) {
+				console.log("응답완료");
+				console.log(data.trim());
 			});
+
 		});
-		
-		$('#btn3').click(function(){
-			
-			let r = "<div>";
-			r = r+'<input type="checkbox" name="ch" class="ch" value="1">';
-			r = r +"</div>";
-			
-			$("#result").append(r);
-			
+
+		$('#btn2').click(function() {
+
+			let v = $('#v1').val();
+
+			$.post("./postTest", {
+				msg : v
+			}, function(data) {
+				console.log(data.trim());
+			})
+		});
+
+		$('#btn3').click(function() {
+			let ar = [];
+
+			$('.num').each(function(index, item) {
+				if ($(item).prop("checked")) {
+					console.log($(item).val());
+					ar.push($(item).val());
+				}
+			});
+
+			let v = $('#v1').val();
+			$.ajax({
+				method : "POST",
+				url : "./arrayTest",
+				traditional : true,
+				data : {
+					msg : v,
+					numbers : ar
+				},
+				success : function(d) {
+					console.log(d.trim());
+				},
+				error : function() {
+					alert("에러 발생");
+				}
+			});
 		});
 	</script>
 

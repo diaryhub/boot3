@@ -32,14 +32,27 @@ public class ProductController {
 	public void add() throws Exception{
 	}
 	
+	@GetMapping("ajaxList")
+	public ModelAndView getAjaxList(Pager pager)throws Exception{
+		ModelAndView mv = new ModelAndView();
+		List<ProductVO> ar = productService.list(pager);
+		mv.addObject("list", ar);
+		mv.addObject("pager", pager);
+		mv.setViewName("common/productList");
+		return mv;
+	}
+	
 	@PostMapping("add")
 	public ModelAndView add(ProductVO productVO,MultipartFile [] files) throws Exception{
 		ModelAndView mv = new ModelAndView();
-		int result = productService.add(productVO, files);
-		mv.setViewName("redirect:./add");
-		if(result>0) {
-		mv.setViewName("redirect:./list");
+		for(MultipartFile f:files) {
+			System.out.println(f.getOriginalFilename());
+			System.out.println(f.getSize());
 		}
+		int result = productService.add(productVO, files);
+		mv.setViewName("common/result");
+		mv.addObject("result", result);
+		
 		return mv;
 	}
 	
