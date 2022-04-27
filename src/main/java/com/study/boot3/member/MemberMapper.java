@@ -21,4 +21,9 @@ public interface MemberMapper {
 	public int fileDelete(MemberFileVO memberFileVO)throws Exception;
 	
 	public MemberFileVO fileDetail(MemberFileVO memberFileVO)throws Exception;
+	
+	public int setRoleAdd(RoleVO roleVO)throws Exception;
+	
+	public int setMemberRoleAdd(MemberRoleVO memberRoleVO)throws Exception;
+	
 }

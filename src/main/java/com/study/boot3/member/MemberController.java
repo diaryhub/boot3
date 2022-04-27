@@ -21,9 +21,9 @@ public class MemberController {
 	public void join() throws Exception{}
 	
 	@PostMapping("join")
-	public ModelAndView join(MemberVO memberVO, MultipartFile file) throws Exception{
+	public ModelAndView join(MemberVO memberVO, String roleName ,MultipartFile file) throws Exception{
 		ModelAndView mv = new ModelAndView();
-		int result = memberService.join(memberVO,file);
+		int result = memberService.join(memberVO,roleName,file);
 		mv.setViewName("redirect:./join");
 		if(0<result) {
 		mv.setViewName("redirect:../");

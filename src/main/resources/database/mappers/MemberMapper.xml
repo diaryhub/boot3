@@ -4,6 +4,13 @@
 
 <mapper namespace="com.study.boot3.member.MemberMapper">
 	
+	<insert id="setMemberRoleVO" parameterType="MemberRoleVO">
+		INSERT INTO MEMBERROLE (ID,ROLEID) VALUES (#{id},#{roleId})
+	</insert>
+	<insert id="setRoleVO" parameterType="RoleVO">
+		INSERT INTO ROLE (ROLEID,ROLENAME) VALUES (NULL,#{roleName})
+	</insert>
+	
 	<insert id="join" parameterType="MemberVO">
 		INSERT INTO MEMBER (ID,PW,NAME,EMAIL,PHONE) VALUES (#{id},#{pw},#{name},#{email},#{phone})
 	</insert>

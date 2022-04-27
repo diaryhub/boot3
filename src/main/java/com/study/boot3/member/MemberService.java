@@ -15,14 +15,23 @@ public class MemberService {
 	@Autowired
 	private FileManager fileManager;
 	
-	public int join(MemberVO memberVO,MultipartFile file) throws Exception {
+	public int join(MemberVO memberVO,String roleName,MultipartFile file) throws Exception {
 		int result = memberMapper.join(memberVO);
+		RoleVO roleVO = new RoleVO();
+		roleVO.setRoleName(roleName);
+		result = memberMapper.setRoleAdd(roleVO);
+		MemberRoleVO memberRoleVO = new MemberRoleVO();
+		memberRoleVO.setId(memberVO.getId());
+		memberRoleVO.setRoleId(roleVO.getRoleId());
+		result = memberMapper.setMemberRoleAdd(memberRoleVO);
+		if(file!=null) {
 		String fileName = fileManager.fileSave(file, "resources/upload/member/");
 		MemberFileVO memberFileVO = new MemberFileVO();
 		memberFileVO.setId(memberVO.getId());
 		memberFileVO.setFileName(fileName);
 		memberFileVO.setOriName(file.getOriginalFilename());
 		result = memberMapper.fileAdd(memberFileVO);
+		}
 		return result;
 	} 
 	public MemberVO login(MemberVO memberVO) throws Exception{
