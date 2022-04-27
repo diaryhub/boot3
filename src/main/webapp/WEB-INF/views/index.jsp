@@ -16,6 +16,13 @@
 </head>
 <body>
 	<c:import url="./temp/header.jsp"></c:import>
+	<div class="container">
+		<c:if test="${not empty member}">
+		<c:forEach items="${member.roleVOs}" var="r">
+			<h3>${r.roleName}</h3>
+		</c:forEach>
+		</c:if>
+	</div>
 	<div class="container my-5">
 		<div id="carouselExampleIndicators" class="carousel slide"
 			data-bs-ride="carousel">

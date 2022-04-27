@@ -7,4 +7,5 @@ public class RoleVO {
 	
 	private Long roleId;
 	private String roleName;
+	
 }

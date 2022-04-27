@@ -1,5 +1,7 @@
 package com.study.boot3.member;
 
+import java.util.List;
+
 import lombok.Data;
 
 @Data
@@ -11,4 +13,5 @@ public class MemberVO {
 	private String email;
 	private String phone;
 	private MemberFileVO memberFileVO;
+	private List<RoleVO> roleVOs;
 }

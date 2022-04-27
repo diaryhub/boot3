@@ -19,6 +19,13 @@ public class ProductController {
 	@Autowired
 	private ProductService productService;
 	
+	@GetMapping("manage")
+	public ModelAndView manage()throws Exception{
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("product/manage");
+		return mv;
+	}
+	
 	@GetMapping("list")
 	public ModelAndView list(Pager pager)throws Exception{
 		ModelAndView mv = new ModelAndView();

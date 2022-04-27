@@ -3,14 +3,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.study.boot3.member.MemberMapper">
-	
-	<insert id="setMemberRoleVO" parameterType="MemberRoleVO">
-		INSERT INTO MEMBERROLE (ID,ROLEID) VALUES (#{id},#{roleId})
+
+	<insert id="setRoleAdd" parameterType="Map">
+		INSERT INTO MEMBERROLE (ID,ROLEID) 
+		VALUES (#{id},(SELECT ROLEID FROM ROLE WHERE ROLENAME=#{roleId}))
 	</insert>
-	<insert id="setRoleVO" parameterType="RoleVO">
-		INSERT INTO ROLE (ROLEID,ROLENAME) VALUES (NULL,#{roleName})
-	</insert>
-	
+
 	<insert id="join" parameterType="MemberVO">
 		INSERT INTO MEMBER (ID,PW,NAME,EMAIL,PHONE) VALUES (#{id},#{pw},#{name},#{email},#{phone})
 	</insert>
@@ -21,19 +19,38 @@
 		<result column="email" property="email" />
 		<result column="phone" property="phone" />
 		<collection property="memberFileVO" javaType="MemberFileVO">
-		<id column="fileNum" property="fileNum" />
-		<result column="fileName" property="fileName" />
-		<result column="oriName" property="oriName" />
+			<id column="fileNum" property="fileNum" />
+			<result column="fileName" property="fileName" />
+			<result column="oriName" property="oriName" />
 		</collection>
 	</resultMap>
 	
-	<select id="login" parameterType="MemberVO" resultType="MemberVO">
-		SELECT ID 
-		FROM MEMBER
+	<resultMap id="loginResult" type="MemberVO">
+		<id column="id" property="id" />
+		<result column="pw" property="pw" />
+		<result column="name" property="name" />
+		<result column="email" property="email" />
+		<result column="phone" property="phone" />
+		<collection property="roleVOs" javaType="List" ofType="RoleVO">
+			<id column="roleId" property="roleId" />
+			<result column="roleName" property="roleName" />
+		</collection>
+	</resultMap>
+	
+
+	<select id="login" parameterType="MemberVO" resultMap="loginResult">
+		SELECT ID,NAME,ROLENAME
+		FROM MEMBER M
+		INNER JOIN
+		MEMBERROLE MR
+		USING (ID)
+		INNER JOIN
+		ROLE R
+		USING (ROLEID)
 		WHERE ID=#{id} AND PW=#{pw}
  	</select>
- 	
- 	<select id="fileDetail" parameterType="MemberFileVO" resultType="MemberFileVO">
+
+	<select id="fileDetail" parameterType="MemberFileVO" resultType="MemberFileVO">
  		SELECT * FROM MEMBERFILE WHERE ID=#{id}
  	</select>
 
@@ -44,21 +61,21 @@
 		USING (ID)
 		WHERE M.ID=#{id}
  	</select>
- 	
- 	<update id="update" parameterType="MemberVO">
+
+	<update id="update" parameterType="MemberVO">
  		UPDATE MEMBER SET NAME=#{name},EMAIL=#{email},PHONE=#{phone} WHERE ID=#{id}
  	</update>
- 	
- 	<delete id="delete" parameterType="MemberVO">
+
+	<delete id="delete" parameterType="MemberVO">
  		DELETE FROM MEMBER WHERE ID=#{id}
  	</delete>
- 	
- 	<insert id="fileAdd" parameterType="MemberFileVO">
+
+	<insert id="fileAdd" parameterType="MemberFileVO">
  		INSERT INTO MEMBERFILE (FILENUM,ID,FILENAME,ORINAME) VALUES (null,#{id},#{fileName},#{oriName})
  	</insert>
- 	
- 	<delete id="fileDelete" parameterType="MemberFileVO">
+
+	<delete id="fileDelete" parameterType="MemberFileVO">
  		DELETE FROM MEMBERFILE WHERE ID=#{id}
  	</delete>
-	
+
 </mapper>

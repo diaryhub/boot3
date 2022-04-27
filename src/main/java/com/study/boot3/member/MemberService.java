@@ -1,6 +1,10 @@
 package com.study.boot3.member;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -15,15 +19,15 @@ public class MemberService {
 	@Autowired
 	private FileManager fileManager;
 	
+	@Value("${member.role.member}")
+	private String memberRole;
+	
 	public int join(MemberVO memberVO,String roleName,MultipartFile file) throws Exception {
 		int result = memberMapper.join(memberVO);
-		RoleVO roleVO = new RoleVO();
-		roleVO.setRoleName(roleName);
-		result = memberMapper.setRoleAdd(roleVO);
-		MemberRoleVO memberRoleVO = new MemberRoleVO();
-		memberRoleVO.setId(memberVO.getId());
-		memberRoleVO.setRoleId(roleVO.getRoleId());
-		result = memberMapper.setMemberRoleAdd(memberRoleVO);
+		Map<String, String> map = new HashMap<>();
+		map.putIfAbsent("id",memberVO.getId());
+		map.put("roleId",memberRole);
+		result = memberMapper.setRoleAdd(map);
 		if(file!=null) {
 		String fileName = fileManager.fileSave(file, "resources/upload/member/");
 		MemberFileVO memberFileVO = new MemberFileVO();

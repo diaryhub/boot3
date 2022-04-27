@@ -23,7 +23,16 @@
 							Dropdown </a>
 						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 							<li><a class="dropdown-item" href="/product/list">Product</a></li>
-							<li><a class="dropdown-item" href="#">Another action</a></li>
+							<c:forEach items="${member.roleVOs}" var="vo">
+							<c:if test="${vo.roleName eq 'ROLE_SELLER'}">
+							<li><a class="dropdown-item" href="/product/manage">Product관리</a></li>
+							</c:if>
+							</c:forEach>
+							<c:forEach items="${member.roleVOs}" var="vo">
+							<c:if test="${vo.roleName eq 'ROLE_ADMIN'}">
+							<li><a class="dropdown-item" href="/admin/manage">관리자모드</a></li>
+							</c:if>
+							</c:forEach>
 							<li><hr class="dropdown-divider"></li>
 							<li><a class="dropdown-item" href="#">Something else
 									here</a></li>
