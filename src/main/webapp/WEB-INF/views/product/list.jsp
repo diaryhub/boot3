@@ -30,7 +30,7 @@
 					<div class="card-body">
 						<h5 class="card-title">${f.productName}</h5>
 						<p class="card-text">${f.productPrice}</p>
-						<a href="#" class="btn btn-primary">Go somewhere</a>
+						<a href="./detail?productNum=${f.productNum}" class="btn btn-primary">Go somewhere</a>
 					</div>
 				</div>
 
@@ -64,7 +64,6 @@
 					aria-label="Search" name="search" style="width: 20%">
 				<button class="btn btn-outline-success" type="submit">Search</button>
 			</form>
-			<a type="button" class="btn btn-primary col-1" href="./add">ADD</a>
 		</div>
 
 	</div>

@@ -4,7 +4,8 @@ import lombok.Data;
 
 @Data
 public class Pager {
-
+	
+	private String id;
 	// DB에서 한 페이지 조회 갯수
 	private Integer perPage;
 	// DB에서 조죄할 시작 인덱스 

@@ -4,12 +4,23 @@
 
 <mapper namespace="com.study.boot3.product.ProductMapper">
 
+
+
+	
 	<select id="list" parameterType="Pager" resultMap="detailResult">
 		SELECT P.*,F.FILENAME,F.FILENUM,F.ORINAME 
 		FROM 
 		(SELECT * 
 		FROM PRODUCT 
 		WHERE PRODUCTNUM>0 
+		<choose>
+		<when test="id!=null">
+		and ID = #{id}		
+		</when>
+		<otherwise>
+		and SALE = 1
+		</otherwise>
+		</choose>
 		ORDER BY PRODUCTNUM DESC
 		LIMIT #{startRow},#{perPage}) P
 		LEFT JOIN
@@ -32,14 +43,33 @@
 	</select>
 	
 	<insert id="add" parameterType="ProductVO" useGeneratedKeys="true" keyProperty="productNum">
-		INSERT INTO PRODUCT (PRODUCTNUM,PRODUCTNAME,PRODUCTPRICE,PRODUCTCOUNT,PRODUCTDETAIL) 
-		VALUES (#{productNum},#{productName},#{productPrice},#{productCount},#{productDetail})
+		INSERT INTO PRODUCT (PRODUCTNUM,PRODUCTNAME,PRODUCTPRICE,PRODUCTCOUNT,PRODUCTDETAIL,ID,SALE) 
+		VALUES (#{productNum},#{productName},#{productPrice},#{productCount},#{productDetail},#{id},#{sale})
 	</insert>
+
+	<update id="update" parameterType="ProductVO">
+		UPDATE PRODUCT 
+		SET PRODUCTNAME=#{productName},PRODUCTPRICE=#{productPrice},PRODUCTCOUNT=#{productCount},PRODUCTDETAIL=#{productDetail},SALE=#{sale} 
+		WHERE PRODUCTNUM=#{productNum}
+	</update>
+	
+	<delete id="delete" parameterType="ProductVO">
+		DELETE FROM PRODUCT
+		WHERE PRODUCTNUM=#{productNum}
+	</delete>
 
 	<insert id="fileAdd" parameterType="ProductFilesVO">
 		INSERT INTO PRODUCTFILES (FILENUM,PRODUCTNUM,FILENAME,ORINAME)
 		VALUES (NULL,#{productNum},#{fileName},#{oriName})
 	</insert>
+	
+	<select id="fileDetail" parameterType="ProductFilesVO" resultType="ProductFilesVO">
+		SELECT * FROM PRODUCTFILES WHERE FILENUM=#{fileNum}
+	</select>
+	
+	<delete id="fileDelete" parameterType="ProductFilesVO">
+		DELETE FROM PRODUCTFILES WHERE FILENUM=#{fileNum}
+	</delete>
 
 	<select id="detail" parameterType="ProductVO" resultMap="detailResult">
 		SELECT P.*,F.* 
@@ -56,6 +86,8 @@
 		<result column="productPrice" property="productPrice" />
 		<result column="productCount" property="productCount" />
 		<result column="productDetail" property="productDetail" />
+		<result column="id" property="id" />
+		<result column="sale" property="sale" />
 		<collection property="filesVOs" javaType="List" ofType="ProductFilesVO">
 			<id column="fileNum" property="fileNum" />
 			<result column="fileName" property="fileName" />

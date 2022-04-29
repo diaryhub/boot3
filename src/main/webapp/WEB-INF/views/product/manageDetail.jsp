@@ -15,33 +15,20 @@
 </head>
 <body>
 	<c:import url="../temp/header.jsp"></c:import>
+	<c:import url="../temp/detail.jsp"></c:import>
+
 	<div class="container">
-		<c:import url="../common/productList.jsp"></c:import>
-		<form action="./manage" id="frm">
-			<input type="hidden" name="pn" id="pn" value="${pager.pn}">
-		</form>
-		<a type="button" class="btn btn-primary col-1" href="./add">ADD</a>
-		
+		<div class="d-flex justify-content-end mx-2">
+			<a class="btn btn-primary mx-2"
+				href="./update?productNum=${vo.productNum}">UPDATE</a> <a
+				class="btn btn-primary mx-2"
+				href="./delete?productNum=${vo.productNum}">DELETE</a>
+		</div>
 	</div>
-
-
-
 	<c:import url="../temp/header_script.jsp"></c:import>
-
-
 	<script type="text/javascript">
-		$('.pager').click(function() {
-			let pn = $(this).attr("data-pn");
-			$('#pn').val(pn);
-			$('#frm').submit();
-		});
-		
-		$('.detail').click(function(){
-			let num = $(this).attr("data-num");
-			location.href="./manageDetail?productNum="+num;
-		});
 		
 	</script>
-
+	
 </body>
 </html>

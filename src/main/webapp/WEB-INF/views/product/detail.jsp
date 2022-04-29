@@ -15,36 +15,13 @@
 </head>
 <body>
 	<c:import url="../temp/header.jsp"></c:import>
-	<h1>Detail Page</h1>
+	<c:import url="../temp/detail.jsp"></c:import>
 	<div class="container">
-		<table class="table table-striped">
-			<thead>
-				<tr>
-					<th scope="col" class="col-2">${VO.productNum}</th>
-					<th scope="col" class="col-4">${VO.productName}</th>
-					<th scope="col" class="col-2">${VO.productPrice}</th>
-					<th scope="col" class="col-2">${VO.productCount}</th>
-				</tr>
-			</thead>
-		</table>
-		<div class="border rounded my-1">
-			<div class="my-2 mx-5">${VO.productDetail}</div>
-			<c:forEach items="${VO.filesVOs}" var="f">
-				<div class="my-2 mx-5">
-					<a href="../resources/upload/product/${f.fileName}"> <img src="../resources/upload/product/${f.fileName}">
-					</a>
-				</div>
-			</c:forEach>
-			
-		</div>
-
-
-		<div class="d-flex justify-content-end mx-2">
-			<a class="btn btn-primary mx-2" href="./update?productNum=${VO.productNum}">UPDATE</a>
-			<a class="btn btn-primary mx-2" href="./delete?productNum=${VO.productNum}">DELETE</a>
+	<div class="d-flex justify-content-end mx-2">
+			<a class="btn btn-primary mx-2" href="#">BUY</a>
 		</div>
 	</div>
-
+	
 	<c:import url="../temp/header_script.jsp"></c:import>
 </body>
 </html>

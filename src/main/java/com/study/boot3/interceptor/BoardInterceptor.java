@@ -13,7 +13,7 @@ import com.study.boot3.member.MemberVO;
 import com.study.boot3.member.RoleVO;
 
 @Component
-public class MemberInterceptor implements HandlerInterceptor {
+public class BoardInterceptor implements HandlerInterceptor {
 
 	@Value("${member.role.member}")
 	private String roleName;
@@ -21,6 +21,7 @@ public class MemberInterceptor implements HandlerInterceptor {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
+		System.out.println("board interceptor");
 
 		HttpSession session = request.getSession();
 		boolean check = false;

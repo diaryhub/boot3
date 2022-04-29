@@ -85,7 +85,7 @@ public class BoardController {
 	@GetMapping("update")
 	public void update(BoardVO boardVO, Model model)throws Exception{
 		boardVO = boardService.getDetail(boardVO);
-		model.addAttribute("VO", boardVO);
+		model.addAttribute("vo", boardVO);
 	}
 	
 	@PostMapping("update")

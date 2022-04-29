@@ -52,10 +52,21 @@
 						<textarea id="summernote" name="productDetail"
 							class="form-control" style="width: 100%;"></textarea>
 					</div>
-						<div id="fileResult"></div>
+					<div class="form-check">
+						<input id="sale1" name="sale" value="1" class="form-check-input"
+							type="radio">
+					<label id="sale1" class="my-2 form-check-label" for="flexRadioDefault1">판매</label>
+					</div>
+					<div class="form-check">
+						<input id="sale2" name="sale" value="0" class="form-check-input" checked
+							type="radio">
+					<label id="sale2" class="my-2 form-check-label" for="flexRadioDefault1">판매중지</label>					
+					</div>
+					
 					 <div class="justify-content-end my-3 d-block">
 						<button id="fileAdd" type="button" class="btn btn-danger d-block">FILE-ADD</button>
 					</div>
+						<div id="fileResult"></div>
 				</div>
 				<div class="col"></div>
 			</div>
@@ -69,35 +80,18 @@
 
 	</div>
 
+	<script src="../js/fileAdd.js"></script>
+	<script src="../js/summernote.js"></script>
 	<script type="text/javascript">
 
+		fileAddInit(0);
+		fileDeleteInit();
 	
+		summernoteInit("summernote","");
 		//list ajax url: ajaxList, Get
 		let pn=1;
 		getList(pn);
-		$('#summernote').summernote({
-			height : 400
-		});
 
-		let count = 0;
-		$("#fileAdd").click(
-			function() {
-				if (count > 4) {
-					alert('최대 5개만 가능');
-					return;
-				}
-				let result = '<div class="input-group mt-2">';
-				result = result + '<input class="form-control files" type="file" name="files">';
-				result = result + '<button class="btn btn-outline-secondary del" type="button">delete</button>';
-				result = result + '</div>';
-				$("#fileResult").append(result);
-				count++;
-			});
-
-		$('#fileResult').on("click", ".del", function() {
-			$(this).parent().remove();
-			count--;
-		});
 
 		$('#add').click(function() {
 			let formData = new FormData();
@@ -105,6 +99,13 @@
 			let productPrice = $('#productPrice').val();
 			let productCount = $('#productCount').val();
 			let productDetail = $('#summernote').summernote("code");
+			let sale = 0;
+			$('.form-check-input').each(function(idx,item){
+				if(item.checked){	
+				console.log($(item).val());
+				sale = $(item).val();
+				}
+			});
 			
 			$('.files').each(function(idx,item){
 				console.log(idx);				//index 번호
@@ -118,9 +119,15 @@
 			});
 			
 			formData.append("productName",productName);
+			console.log("productName:"+productName);
 			formData.append("productPrice",productPrice);
+			console.log("productPrice:"+productPrice);
 			formData.append("productCount",productCount);
+			console.log("productCount:"+productCount);
 			formData.append("productDetail",productDetail);
+			console.log("productDetail:"+productDetail);
+			formData.append("sale",sale);
+			console.log("sale:"+sale);
 			
 			 $.ajax({
 				method : "POST",
@@ -135,8 +142,11 @@
 					productDetail : productDetail
 					
 				} */,
-				success : function(data) {
+				success :
+					function(data) {
+					$('.note-image-input').val('');
 					if (data.trim() == '1') {
+						console.log("ajax success");
 						alert("상품 등록 완료");
 						$('#productName').val("");
 						$('#productPrice').val("");
@@ -148,6 +158,7 @@
 					}
 				},
 				error : function() {
+					console.log("ajax fail");
 					alert("에러");
 				}
 			}); 
