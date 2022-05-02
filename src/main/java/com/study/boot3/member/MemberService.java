@@ -55,4 +55,8 @@ public class MemberService {
 		return memberMapper.delete(memberVO);
 	}
 	
+	public MemberVO findId(MemberVO memberVO)throws Exception{
+		return memberMapper.findId(memberVO);
+	}
+	
 }

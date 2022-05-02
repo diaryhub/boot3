@@ -77,5 +77,24 @@
 	<delete id="fileDelete" parameterType="MemberFileVO">
  		DELETE FROM MEMBERFILE WHERE ID=#{id}
  	</delete>
+ 	
+ 	<select id="findId" parameterType="MemberVO" resultType="MemberVO">
+ 		SELECT ID FROM MEMBER WHERE EMAIL=#{email}
+ 	</select>
 
 </mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

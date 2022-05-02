@@ -21,7 +21,8 @@
 				<div class="mb-5 mt-3 border border-2 rounded">
 
 					<form action="./login" method="post" class="my-5">
-						<input type="hidden" name="connectionPath" value="${connectionPath}">
+						<input type="hidden" name="connectionPath"
+							value="${connectionPath}">
 						<div class="row">
 							<div class="col"></div>
 							<div class="col-8">
@@ -36,21 +37,30 @@
 									<input type="password" class="form-control my-3" name="pw">
 								</fieldset>
 								<div>
-								<fieldset class="text-end">
-									아이디 기억하기
-									<input type="checkbox" name="remember" id="rememberId"
-										value="1">
-								</fieldset>
+									<fieldset class="text-end">
+										아이디 기억하기 <input type="checkbox" name="remember"
+											id="rememberId" value="1">
+									</fieldset>
 								</div>
-								<div class="d-flex justify-content-between align-items-end mt-4">	
-									<span> 
-										아직 회원이 아니신가요?
-										<a href="./join">회원가입</a>
-									</span>
-									<span>					
+								<div class="d-flex justify-content-between align-items-end mt-4">
+									
+										<span> 아직 회원이 아니신가요? <a href="./join">회원가입</a>
+										</span>
+									
+									
+									<span>
 										<button type="submit" class="btn btn-outline-primary">LOGIN</button>
 									</span>
-								</div>								
+									
+
+								</div>
+									<div class="d-flex justify-content-between align-items-end mt-4">
+										<span> ID를 잊어버리셨나요?
+											<a href="./findId">
+											<button type="button" class="btn btn-danger">ID찾기</button>
+											</a>
+										</span>
+									</div>
 							</div>
 							<div class="col"></div>
 						</div>

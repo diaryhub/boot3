@@ -93,5 +93,17 @@ public class MemberController {
 		return mv;
 	}
 	
+	@GetMapping("findId")
+	public void findId()throws Exception {}
+	
+	@PostMapping("findId")
+	public ModelAndView findId(MemberVO memberVO)throws Exception{
+		ModelAndView mv = new ModelAndView();
+		memberVO = memberService.findId(memberVO);
+		mv.setViewName("member/findIdResult");
+		mv.addObject("member", memberVO);
+		return mv;
+		
+	}
 	
 }

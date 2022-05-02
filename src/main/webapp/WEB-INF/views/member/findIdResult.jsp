@@ -9,26 +9,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-	crossorigin="anonymous">
+	rel="stylesheet">
 <title>Insert title here</title>
 </head>
 <body>
 	<c:import url="../temp/header.jsp"></c:import>
-	<c:import url="../temp/detail.jsp"></c:import>
-	
-	<div class="container">
-		<h1> <spring:message code="product.detail.info" arguments="${vo.productPrice}; ${vo.productCount}" argumentSeparator=";">
-		</spring:message> </h1>
-	</div>
-	
-	<div class="container">
-	<div class="d-flex justify-content-end mx-2">
-			<a class="btn btn-primary mx-2" href="#">BUY</a>
+
+		<div class="container">
+			<h1>
+			 <spring:message code="${member!=null? 'member.findId.success':'member.findId.failed'}" arguments="${member.id}"></spring:message>
+			</h1>
 		</div>
-	</div>
-	
+		
 	<c:import url="../temp/header_script.jsp"></c:import>
+
 </body>
 </html>
