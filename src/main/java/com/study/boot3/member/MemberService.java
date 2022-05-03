@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.study.boot3.util.FileManager;
@@ -21,6 +22,22 @@ public class MemberService {
 	
 	@Value("${member.role.member}")
 	private String memberRole;
+	
+	public boolean memberError(MemberVO memberVO,BindingResult bindingResult) throws Exception {
+		boolean check = false;
+		check = bindingResult.hasErrors();
+		if(!memberVO.getPw().equals(memberVO.getCheckPw())) {
+			check = true;
+			bindingResult.rejectValue("checkPw","member.password.notEqual");
+		}
+		
+		if(memberMapper.idCheck(memberVO)!=null) {
+			check=true;
+			bindingResult.rejectValue("id", "member.id.check");
+		}
+		
+		return check;
+	}
 	
 	public int join(MemberVO memberVO,String roleName,MultipartFile file) throws Exception {
 		int result = memberMapper.join(memberVO);

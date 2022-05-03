@@ -3,10 +3,13 @@ package com.study.boot3.product;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
@@ -43,7 +46,7 @@ public class ProductController {
 	}
 
 	@GetMapping("add")
-	public void add() throws Exception {
+	public void add(@ModelAttribute ProductVO productVO) throws Exception {
 	}
 
 	@GetMapping("ajaxList")
@@ -59,8 +62,12 @@ public class ProductController {
 	}
 
 	@PostMapping("add")
-	public ModelAndView add(HttpSession session, ProductVO productVO, MultipartFile[] files) throws Exception {
+	public ModelAndView add(@Valid ProductVO productVO,BindingResult bindingResult,HttpSession session,MultipartFile [] files) throws Exception {
 		ModelAndView mv = new ModelAndView();
+		if(bindingResult.hasErrors()) {
+			mv.setViewName("product/add");
+			return mv;
+		}
 		if (files != null) {
 			for (MultipartFile f : files) {
 				System.out.println(f.getOriginalFilename());

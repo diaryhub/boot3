@@ -1,10 +1,14 @@
 package com.study.boot3.member;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,25 +22,37 @@ public class MemberController {
 	private MemberService memberService;
 	
 	@GetMapping("join")
-	public void join() throws Exception{}
+	public void join(@ModelAttribute MemberVO memberVO) throws Exception{}
 	
 	@PostMapping("join")
-	public ModelAndView join(MemberVO memberVO, String roleName ,MultipartFile file) throws Exception{
+	public ModelAndView join(@Valid MemberVO memberVO,BindingResult bindingResult, String roleName ,MultipartFile file) throws Exception{
 		ModelAndView mv = new ModelAndView();
+		
+		if(memberService.memberError(memberVO, bindingResult)) {
+			mv.setViewName("member/join");
+			return mv;
+		}
 		int result = memberService.join(memberVO,roleName,file);
 		mv.setViewName("redirect:./join");
 		if(0<result) {
-		mv.setViewName("redirect:../");
+			mv.setViewName("redirect:../");
 		}
 		return mv;
 	}
 	
 	@GetMapping("login")
-	public void login() throws Exception{}
+	public ModelAndView login(MemberVO memberVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		//mv.addObject("vo", new MemberVO());
+		mv.setViewName("member/login");
+		return mv;
+	}
 	
 	@PostMapping("login")
-	public ModelAndView login(MemberVO memberVO, HttpSession session)throws Exception{
+	public ModelAndView login(MemberVO memberVO,HttpSession session)throws Exception{
 		ModelAndView mv = new ModelAndView();
+		
+		
 		memberVO = memberService.login(memberVO);
 		mv.setViewName("redirect:./login");
 		if(memberVO!=null) {			

@@ -81,7 +81,11 @@
  	<select id="findId" parameterType="MemberVO" resultType="MemberVO">
  		SELECT ID FROM MEMBER WHERE EMAIL=#{email}
  	</select>
-
+ 	
+ 	<select id="idCheck" parameterType="MemberVO" resultType="MemberVO">
+ 		SELECT ID FROM MEMBER WHERE ID = #{id}
+ 	</select>
+ 	
 </mapper>
 
 

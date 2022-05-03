@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,8 +20,8 @@
 			<div class="col"></div>
 			<div class="col-6">
 				<div class="mb-5 mt-3 border border-2 rounded">
-
-					<form action="./login" method="post" class="my-5">
+					
+					<form:form modelAttribute="memberVO" action="./login" method="post" class="my-5">
 						<input type="hidden" name="connectionPath"
 							value="${connectionPath}">
 						<div class="row">
@@ -28,20 +29,24 @@
 							<div class="col-8">
 								<fieldset>
 									<legend>아이디</legend>
-									<input type="text" class="form-control my-3" name="id"
-										value="${cookie.remember.value}">
+									<%-- <input type="text" class="form-control my-3" name="id"
+										value="${cookie.remember.value}"> --%>
+									<form:input path="id" cssClass="form-control my-3" id="id"/>
+									<form:errors path="id"></form:errors>
 								</fieldset>
 
 								<fieldset>
 									<legend>비밀번호</legend>
-									<input type="password" class="form-control my-3" name="pw">
+									<!-- <input type="password" class="form-control my-3" name="pw"> -->
+									<form:password path="pw" cssClass="form-control my-3"/>
+									<form:errors path="pw" cssStyle="color:red;"></form:errors>
 								</fieldset>
-								<div>
+								<!-- <div>
 									<fieldset class="text-end">
 										아이디 기억하기 <input type="checkbox" name="remember"
 											id="rememberId" value="1">
 									</fieldset>
-								</div>
+								</div> -->
 								<div class="d-flex justify-content-between align-items-end mt-4">
 									
 										<span> 아직 회원이 아니신가요? <a href="./join">회원가입</a>
@@ -64,7 +69,7 @@
 							</div>
 							<div class="col"></div>
 						</div>
-					</form>
+					</form:form>
 				</div>
 			</div>
 			<div class="col"></div>

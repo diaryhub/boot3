@@ -28,4 +28,6 @@ public interface MemberMapper {
 	
 	public MemberVO findId(MemberVO memberVO)throws Exception;
 	
+	public MemberVO idCheck(MemberVO memberVO)throws Exception;
+	
 }

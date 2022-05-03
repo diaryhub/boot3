@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,7 +26,7 @@
 	<c:import url="../temp/header.jsp"></c:import>
 	<div class="container my-5">
 		<div class="row" id="list"></div>
-		<form action="./add" method="post" class="border row"
+		<form:form modelAttribute="productVO" action="./add" method="post" cssClass="border row"
 			enctype="multipart/form-data">
 
 			<div class="row">
@@ -33,33 +34,31 @@
 				<div class="col-8">
 					<label class="mt-5">Product Name</label>
 					<div class="justify-content-center my-2">
-						<input id="productName" name="productName" class="form-control"
-							style="width: 100%">
-
+						<form:input path="productName" id="productName" cssClass="form-control"/>
+						<form:errors path="productName"></form:errors>
 					</div>
 					<label class="my-2">Product Price</label>
 					<div class="justify-content-center">
-						<input id="productPrice" name="productPrice" class="form-control"
-							style="width: 100%">
+							<form:input path="productPrice" id="productPrice" cssClass="form-control"/>
+						<form:errors path="productPrice"></form:errors>
 					</div>
 					<label class="my-2">Product Count</label>
 					<div class="justify-content-center">
-						<input id="productCount" name="productCount" class="form-control"
-							style="width: 100%">
+							<form:input path="productCount" id="productCount" cssClass="form-control"/>
+						<form:errors path="productCount"></form:errors>
 					</div>
 					<label class="my-2">Detail</label>
 					<div class="justify-content-center">
-						<textarea id="summernote" name="productDetail"
-							class="form-control" style="width: 100%;"></textarea>
+							<form:textarea path="productDetail" id="summernote" cssClass="form-control"/>
+						<form:errors path="productDetail"></form:errors>
 					</div>
 					<div class="form-check">
-						<input id="sale1" name="sale" value="1" class="form-check-input"
-							type="radio">
+			
+						<form:radiobutton path="sale" id="sale1" value="1" cssClass="form-check-input"/>
 					<label id="sale1" class="my-2 form-check-label" for="flexRadioDefault1">판매</label>
 					</div>
 					<div class="form-check">
-						<input id="sale2" name="sale" value="0" class="form-check-input" checked
-							type="radio">
+						<form:radiobutton path="sale" id="sale2" value="0" cssClass="form-check-input"/>
 					<label id="sale2" class="my-2 form-check-label" for="flexRadioDefault1">판매중지</label>					
 					</div>
 					
@@ -73,10 +72,10 @@
 
 			<div class="row justify-content-center">
 				<div class="col-1 my-4">
-					<button type="button" id="add" class="btn btn-primary">ADD</button>
+					<button type="submit" id="add" class="btn btn-primary">ADD</button>
 				</div>
 			</div>
-		</form>
+		</form:form>
 
 	</div>
 
