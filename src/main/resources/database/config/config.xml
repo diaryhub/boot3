@@ -13,5 +13,6 @@
 		<typeAlias type="com.study.boot3.member.MemberFileVO" alias="MemberFileVO"/>
 		<typeAlias type="com.study.boot3.product.ProductVO" alias="ProductVO"/>
 		<typeAlias type="com.study.boot3.product.ProductFilesVO" alias="ProductFilesVO"/>
+		<typeAlias type="com.study.boot3.cart.CartVO" alias="CartVO"/>
 	</typeAliases>
 </configuration>

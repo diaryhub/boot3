@@ -26,9 +26,11 @@
 	<div class="container">
 	<div class="d-flex justify-content-end mx-2">
 			<a class="btn btn-primary mx-2" href="#">BUY</a>
+			<button class="btn btn-info mx-2" id="cart" data-pn="${vo.productNum}">CART</button>
 		</div>
 	</div>
 	
 	<c:import url="../temp/header_script.jsp"></c:import>
+	<script type="text/javascript" src="../js/cart.js"></script>
 </body>
 </html>

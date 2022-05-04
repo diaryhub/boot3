@@ -29,12 +29,23 @@
 			</ul>
 		</div>
 		<div class="d-flex justify-content-between mt-4 ">
-			<a href="./update" class="btn btn-outline-secondary">내 정보 수정하기</a> <a
-				href="./delete" class="btn btn-outline-secondary">회원 탈퇴</a>
+			<a href="./update" class="btn btn-outline-secondary">내 정보 수정하기</a> 
+			<a href="./delete" class="btn btn-outline-secondary">회원 탈퇴</a>
 		</div>
-
+	<div class="container">
+		<div class="row">
+			<button type="button" class="btn btn-primary" id="getList">GETLIST</button>
+			<button type="button" id="delbtn">DELETE</button>
+		</div>
+	
+	</div>
 
 	</div>
+	
 	<c:import url="../temp/header_script.jsp"></c:import>
+	<script src="../js/cart.js"></script>
+	<script type="text/javascript">
+		getList();
+	</script>
 </body>
 </html>

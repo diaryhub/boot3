@@ -42,9 +42,10 @@ public class ExceptionController {
 	}
 
 	@ExceptionHandler(Throwable.class)
-	public ModelAndView ex4() {
+	public ModelAndView ex4(Exception e) {
 		ModelAndView mv = new ModelAndView();
 		System.out.println("Throwable 예외발생");
+		e.printStackTrace();
 		mv.setViewName("error/error");
 
 		return mv;
